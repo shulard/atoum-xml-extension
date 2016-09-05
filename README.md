@@ -10,6 +10,12 @@ Install extension using [composer](https://getcomposer.org):
 
 ```json
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:shulard/atoum-xml-extension.git"
+        }
+    ],
     "require-dev": {
         "shulard/atoum-xml-extension": "dev-master"
     },
