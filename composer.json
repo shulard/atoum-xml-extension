@@ -1,0 +1,23 @@
+{
+    "name": "shulard/atoum-xml-extension",
+    "description": "The atoum xml extension allows you to make assertions on XML files",
+    "require": {
+        "atoum/atoum": "^2.8"
+    },
+    "require-dev": {
+        "atoum/praspel-extension": "~0"
+    },
+    "license": "apache2",
+    "authors": [
+        {
+            "name": "Stéphane HULARD",
+            "email": "s.hulard@chstudio.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "mageekguy\\atoum\\xml\\": "classes"
+        },
+        "files": ["autoloader.php"]
+    }
+}
