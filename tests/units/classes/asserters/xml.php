@@ -13,11 +13,11 @@ class xml extends atoum\test
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserters\phpString')
+                ->isSubClassOf('mageekguy\atoum\asserter')
         ;
     }
 
-    public function testSetWith()
+    public function testSetWithInvalidXml()
     {
         $string = $this->realdom->regex('/[a-z]+/');
         $this
@@ -31,7 +31,22 @@ class xml extends atoum\test
                     }
                 )
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
-                    ->hasMessage(sprintf('%s is not a valid XML string', $asserter))
+                    ->hasMessage(sprintf('%s is not a valid XML', $value))
+        ;
+    }
+
+    public function testSetWithSimpleXmlElement()
+    {
+        $this
+            ->given(
+                $test = $this,
+                $xml = new \SimpleXmlElement('<?xml version="1.0"?><root></root>')
+            )
+            ->if($asserter = new testedClass())
+            ->and($asserter->setWith($xml))
+            ->then
+                ->object($asserter->size)
+                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
         ;
     }
 }
