@@ -105,6 +105,8 @@ class node extends asserter
 
     protected function getNodesAsserter($data)
     {
-        return $this->generator->__call('mageekguy\atoum\xml\asserters\nodes', array($data));
+        $asserter = $this->generator->__call('mageekguy\atoum\xml\asserters\nodes', array($data));
+        $asserter->setFrom($this);
+        return $asserter;
     }
 }
