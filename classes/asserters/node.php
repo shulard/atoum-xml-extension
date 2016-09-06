@@ -54,6 +54,12 @@ class node extends asserter
         return $this->getNodesAsserter($this->valueIsSet()->data->xpath($path));
     }
 
+    public function attributes($namespace = '')
+    {
+        $attributes = (array)$this->valueIsSet()->data->attributes($namespace, filter_var($namespace, FILTER_VALIDATE_URL)===false);
+        return $this->generator->__call('phpArray', array(isset($attributes['@attributes'])?$attributes['@attributes']:array()));
+    }
+
     public function withNamespace($prefix, $uri)
     {
         $this->valueIsSet()->data->registerXPathNamespace($prefix, $uri);
