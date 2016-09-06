@@ -17,7 +17,7 @@ Install extension using [composer](https://getcomposer.org):
         }
     ],
     "require-dev": {
-        "shulard/atoum-xml-extension": "dev-master"
+        "shulard/atoum-xml-extension": "^0.0"
     },
 }
 
