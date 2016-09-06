@@ -32,7 +32,7 @@ class nodes extends asserter
             }
         }
 
-        $this->fail(sprintf($this->getLocale()->_('%s is not a valid array of SimpleXMLElement'), $value));
+        $this->fail(sprintf($this->getLocale()->_('%s is not a valid array of SimpleXMLElement'), var_export($value, true)));
     }
 
     public function __get($asserter)
@@ -55,6 +55,16 @@ class nodes extends asserter
         }
 
         return $this;
+    }
+
+    public function first()
+    {
+        return $this->item(0);
+    }
+
+    public function last()
+    {
+        return $this->item(count($this->valueIsSet()->data)-1);
     }
 
     public function item($position)
