@@ -60,6 +60,6 @@ class extension extends atoum\test
         ;
 
         $faker = $test->xml('<?xml version="1.0" ?><root></root>');
-        $this->object($faker)->isInstanceOf('mageekguy\atoum\xml\asserters\xml');
+        $this->object($faker)->isInstanceOf('mageekguy\atoum\xml\asserters\node');
     }
 }

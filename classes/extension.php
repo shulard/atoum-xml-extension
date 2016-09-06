@@ -34,10 +34,13 @@ class extension implements atoum\extension
         $test->getAssertionManager()
             ->setHandler(
                 'xml',
-                function($xml, $depth = null, $options = null) use ($test, & $asserter) {
+                function($xml = null, $depth = null, $options = null) use ($test, & $asserter) {
                     if ($asserter === null)
                     {
-                        $asserter = new atoum\xml\asserters\xml($test->getAsserterGenerator());
+                        $asserter = new atoum\xml\asserters\node($test->getAsserterGenerator());
+                    }
+                    if (null === $xml) {
+                        return $asserter;
                     }
                     return $asserter->setWith($xml, $depth, $options);
                 }
