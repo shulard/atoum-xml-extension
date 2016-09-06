@@ -34,9 +34,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 
 use mageekguy\atoum\xml;
 
-$extension = new xml\extension($script);
-
-$extension->addToRunner($runner);
+$runner->addExtension(new xml\extension($script));
 ```
 
 ## Use it
