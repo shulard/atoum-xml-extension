@@ -67,17 +67,27 @@ class node extends asserter
         return $this;
     }
 
-    public function hasNamespace($prefix, $uri)
+    public function hasDocNamespace($prefix, $uri, $failMessage = '%s document namespace does not exists with URI: %s')
+    {
+        $ns = $this->valueIsSet()->data->getDocNamespaces();
+        return $this->checkNamespace($prefix, $uri, $ns, $failMessage);
+    }
+
+    public function hasNamespace($prefix, $uri, $failMessage = '%s namespace does not exists with URI: %s')
     {
         $ns = $this->valueIsSet()->data->getNamespaces();
+        return $this->checkNamespace($prefix, $uri, $ns, $failMessage);
+    }
 
+    protected function checkNamespace($prefix, $uri, $ns, $failMessage)
+    {
         if(isset($ns[$prefix]) && $ns[$prefix] === $uri)
         {
             $this->pass();
         }
         else
         {
-            $this->fail(sprintf($this->getLocale()->_('%s namespace does not exists with URI: %s'), $prefix, $uri));
+            $this->fail(sprintf($this->getLocale()->_($failMessage), $prefix, $uri));
         }
 
         return $this;
