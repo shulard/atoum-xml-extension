@@ -9,8 +9,14 @@ use
 
 class nodes extends asserter
 {
+    protected $from;
     protected $data;
     protected $isSet = false;
+
+    public function setFrom(node $node)
+    {
+        $this->from = $node;
+    }
 
     public function setWith($value)
     {
@@ -50,6 +56,16 @@ class nodes extends asserter
     protected function valueIsSet($message = 'Node collection is undefined')
     {
         if ($this->isSet === false)
+        {
+            throw new exceptions\logic($message);
+        }
+
+        return $this;
+    }
+
+    protected function fromIsSet($message = 'Node source is undefined')
+    {
+        if ($this->from === null)
         {
             throw new exceptions\logic($message);
         }
