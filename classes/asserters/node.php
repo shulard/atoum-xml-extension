@@ -41,8 +41,8 @@ class node extends asserter
             case 'nodevalue':
                 return $this->generator->__call('phpString', array((string)$this->valueIsSet()->data));
 
-            case 'attributes':
-                return $this->generator->__call('phpArray', array($this->valueIsSet()->data['@attributes']));
+            case 'xml':
+                return $this->generator->__call('phpString', array($this->valueIsSet()->data->asXML()));
 
             default:
                 return $this->getNodesAsserter($this->valueIsSet()->data->children($asserter));
