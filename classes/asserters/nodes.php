@@ -101,9 +101,14 @@ class nodes extends asserter
         }
         else
         {
-            $this->fail($failMessage ?: $this->_('%s has size %d, expected size %d', $this, count($this->valueIsSet()->data), $size));
+            $this->fail($failMessage ?: $this->_('%s has size %d, expected size %d', get_class($this), count($this->valueIsSet()->data), $size));
         }
 
         return $this;
+    }
+
+    public function parent()
+    {
+        return $this->fromIsSet()->from;
     }
 }
