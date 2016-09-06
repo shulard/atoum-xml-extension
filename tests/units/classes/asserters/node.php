@@ -61,9 +61,7 @@ class node extends atoum\test
         $xml = <<<XML
 <?xml version="1.0" ?>
 <root xmlns:atom="http://purl.org/atom/ns#" xmlns:toto="http://example.com" xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <atom:feed>
-        <dc:node>namespaced content</dc:node>
-    </atom:feed>
+    <atom:feed>1<dc:node>namespaced content</dc:node>2</atom:feed>
 </root>
 XML;
 
@@ -78,6 +76,11 @@ XML;
                         ->item(0)
                             ->xpath('./dc:node')
                                 ->hasSize(1)
+                            ->parent()
+                                ->xpath('//atom:feed')
+                                    ->hasSize(1)
+                                    ->item(0)
+                                        ->nodeValue->isEqualTo("12")
         ;
     }
 
