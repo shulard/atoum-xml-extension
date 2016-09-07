@@ -10,7 +10,6 @@ use
 class node extends asserter
 {
     protected $data;
-    protected $isSet = false;
 
     public function setWith($value)
     {
@@ -23,7 +22,6 @@ class node extends asserter
         {
             $this->fail(sprintf($this->getLocale()->_('%s is not a valid XML'), $value));
         }
-        $this->isSet = true;
 
         return $this;
     }
@@ -95,7 +93,7 @@ class node extends asserter
 
     protected function valueIsSet($message = 'Xml is undefined')
     {
-        if ($this->isSet === false)
+        if ($this->data === null)
         {
             throw new exceptions\logic($message);
         }
