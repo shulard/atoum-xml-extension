@@ -281,4 +281,25 @@ XML;
         ;
     }
 
+    public function testSchemaValidation()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<root>
+    <node/>
+    <node>
+        <subnode />
+    </node>
+</root>
+XML;
+
+        $this
+            ->given(
+                $path = realpath(__DIR__.'/../../../resources/node.xsd')
+            )
+            ->then
+                ->xml($xml)
+                    ->validateWithSchema($path)
+        ;
+    }
 }

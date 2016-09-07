@@ -156,6 +156,37 @@ class node extends asserter
         return $this;
     }
 
+    public function validateWithSchema($schema = null, $failMessage = "Can't validate document using the given Schema")
+    {
+        $xml = $this->valueIsSet()->data->asXML();
+        $dom = new \DOMDocument;
+        $dom->loadXML($xml);
+
+        if(!is_file($schema)) {
+            throw new exceptions\logic(
+                sprintf($this->getLocale()->_('Given schema is not a valid file : %s'), $schema)
+            );
+        }
+
+        $useError = libxml_use_internal_errors(true);
+        if(@$dom->schemaValidate($schema))
+        {
+            $this->pass();
+        }
+        else
+        {
+            $message = $this->getLocale()->_($failMessage);
+            foreach(libxml_get_errors() as $error) {
+                $message .= PHP_EOL . sprintf('[%d] at line %s: %s', $error->level, $error->line, $error->message);
+            }
+
+            $this->fail($message);
+        }
+        libxml_use_internal_errors($useError);
+
+        return $this;
+    }
+
     protected function valueIsSet($message = 'Xml is undefined')
     {
         if ($this->data === null)
