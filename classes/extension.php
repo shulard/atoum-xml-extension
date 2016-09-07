@@ -42,7 +42,10 @@ class extension implements atoum\extension
                     if (null === $xml) {
                         return $asserter;
                     }
-                    return $asserter->setWith($xml, $depth, $options);
+
+                    return $asserter
+                        ->setWithTest($test)
+                        ->setWith($xml, $depth, $options);
                 }
             )
         ;
