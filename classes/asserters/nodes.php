@@ -2,9 +2,8 @@
 
 namespace mageekguy\atoum\xml\asserters;
 
-use
-    mageekguy\atoum\asserter,
-    mageekguy\atoum\exceptions
+use mageekguy\atoum\asserter;
+use mageekguy\atoum\exceptions
 ;
 
 class nodes extends asserter
@@ -21,12 +20,11 @@ class nodes extends asserter
     public function setWith($value)
     {
         parent::setWith($value);
-        if (is_array($value) === true || $value instanceof \SimpleXMLElement)
-        {
+        if (is_array($value) === true || $value instanceof \SimpleXMLElement) {
             $count = is_array($value) === true?count($value):$value->count();
             $filtered = array();
-            foreach($value as $node) {
-                if($node instanceof \SimpleXMLElement) {
+            foreach ($value as $node) {
+                if ($node instanceof \SimpleXMLElement) {
                     $filtered[] = $node;
                 }
             }
@@ -38,13 +36,15 @@ class nodes extends asserter
             }
         }
 
-        $this->fail(sprintf($this->getLocale()->_('%s is not a valid array of SimpleXMLElement'), var_export($value, true)));
+        $this->fail(sprintf(
+            $this->getLocale()->_('%s is not a valid array of SimpleXMLElement'),
+            var_export($value, true)
+        ));
     }
 
     public function __get($asserter)
     {
-        switch (strtolower($asserter))
-        {
+        switch (strtolower($asserter)) {
             case 'size':
                 return $this->generator->__call('integer', array(count($this->valueIsSet()->data)));
 
@@ -58,8 +58,7 @@ class nodes extends asserter
 
     protected function valueIsSet($message = 'Node collection is undefined')
     {
-        if ($this->isSet === false)
-        {
+        if ($this->isSet === false) {
             throw new exceptions\logic($message);
         }
 
@@ -68,8 +67,7 @@ class nodes extends asserter
 
     protected function fromIsSet($message = 'Node source is undefined')
     {
-        if ($this->from === null)
-        {
+        if ($this->from === null) {
             throw new exceptions\logic($message);
         }
 
@@ -98,13 +96,12 @@ class nodes extends asserter
 
     public function hasSize($size, $failMessage = '%s has size %d, expected size %d')
     {
-        if (count($this->valueIsSet()->data) == $size)
-        {
+        if (count($this->valueIsSet()->data) == $size) {
             $this->pass();
-        }
-        else
-        {
-            $this->fail($failMessage ?: $this->_($failMessage, get_class($this), count($this->valueIsSet()->data), $size));
+        } else {
+            $this->fail(
+                $failMessage ?: $this->_($failMessage, get_class($this), count($this->valueIsSet()->data), $size)
+            );
         }
 
         return $this;

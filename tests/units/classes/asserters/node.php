@@ -2,9 +2,8 @@
 
 namespace mageekguy\atoum\xml\tests\units\asserters;
 
-use
-    mageekguy\atoum,
-    mageekguy\atoum\xml\asserters\node as testedClass
+use mageekguy\atoum;
+use mageekguy\atoum\xml\asserters\node as testedClass
 ;
 
 class node extends atoum\test
@@ -26,10 +25,9 @@ class node extends atoum\test
             )
             ->if($asserter = new testedClass())
             ->then
-                ->exception(function() use ($asserter, & $value, $test, $string) {
+                ->exception(function () use ($asserter, & $value, $test, $string) {
                         $asserter->setWith($value = $test->sample($string));
-                    }
-                )
+                })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid XML', $value))
         ;
@@ -47,10 +45,9 @@ class node extends atoum\test
             ->if($asserter = new testedClass())
             ->and($asserter->setWith($xml))
             ->then
-                ->exception(function() use ($asserter, & $value, $test, $prefix, $uri) {
+                ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
                         $asserter->isUsedNamespace($prefix, $uri);
-                    }
-                )
+                })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s namespace does not exists with URI: %s', $prefix, $uri))
         ;
@@ -96,10 +93,9 @@ XML;
             ->if($asserter = new testedClass())
             ->and($asserter->setWith($xml))
             ->then
-                ->exception(function() use ($asserter, & $value, $test, $prefix, $uri) {
+                ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
                         $asserter->hasNamespace($prefix, $uri);
-                    }
-                )
+                })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s document namespace does not exists with URI: %s', $prefix, $uri))
         ;

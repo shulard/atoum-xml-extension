@@ -10,10 +10,9 @@ class extension implements atoum\extension
 {
     public function __construct(atoum\configurator $configurator = null)
     {
-        if ($configurator)
-        {
+        if ($configurator) {
             $parser = $configurator->getScript()->getArgumentsParser();
-            $handler = function($script, $argument, $values) {
+            $handler = function ($script, $argument, $values) {
                 $script->getRunner()->addTestsFromDirectory(dirname(__DIR__) . '/tests/units/classes');
             };
             $parser
@@ -34,9 +33,8 @@ class extension implements atoum\extension
         $test->getAssertionManager()
             ->setHandler(
                 'xml',
-                function($xml = null, $depth = null, $options = null) use ($test, & $asserter) {
-                    if ($asserter === null)
-                    {
+                function ($xml = null, $depth = null, $options = null) use ($test, & $asserter) {
+                    if ($asserter === null) {
                         $asserter = new atoum\xml\asserters\node($test->getAsserterGenerator());
                     }
                     if (null === $xml) {
@@ -52,5 +50,7 @@ class extension implements atoum\extension
         return $this;
     }
 
-    public function handleEvent($event, observable $observable) {}
+    public function handleEvent($event, observable $observable)
+    {
+    }
 }

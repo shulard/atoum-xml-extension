@@ -2,9 +2,8 @@
 
 namespace mageekguy\atoum\xml\asserters;
 
-use
-    mageekguy\atoum\asserter,
-    mageekguy\atoum\exceptions
+use mageekguy\atoum\asserter;
+use mageekguy\atoum\exceptions
 ;
 
 class node extends asserter
@@ -14,12 +13,9 @@ class node extends asserter
     public function setWith($value)
     {
         parent::setWith($value);
-        if ($value instanceof \SimpleXMLElement)
-        {
+        if ($value instanceof \SimpleXMLElement) {
             $this->data = $value;
-        }
-        elseif (false === $this->data = @simplexml_load_string($value))
-        {
+        } elseif (false === $this->data = @simplexml_load_string($value)) {
             $this->fail(sprintf($this->getLocale()->_('%s is not a valid XML'), $value));
         }
 
@@ -28,8 +24,7 @@ class node extends asserter
 
     public function __get($asserter)
     {
-        switch (strtolower($asserter))
-        {
+        switch (strtolower($asserter)) {
             case 'children':
                 return $this->getNodesAsserter($this->valueIsSet()->data->children());
 
@@ -57,8 +52,12 @@ class node extends asserter
 
     public function attributes($namespace = '')
     {
-        $attributes = (array)$this->valueIsSet()->data->attributes($namespace, filter_var($namespace, FILTER_VALIDATE_URL)===false);
-        return $this->generator->__call('phpArray', array(isset($attributes['@attributes'])?$attributes['@attributes']:array()));
+        $attributes = (array)$this->valueIsSet()->data
+            ->attributes($namespace, filter_var($namespace, FILTER_VALIDATE_URL)===false);
+        return $this->generator->__call(
+            'phpArray',
+            array(isset($attributes['@attributes'])?$attributes['@attributes']:array())
+        );
     }
 
     public function withNamespace($prefix, $uri)
@@ -82,12 +81,9 @@ class node extends asserter
 
     protected function checkNamespace($prefix, $uri, $ns, $failMessage)
     {
-        if(isset($ns[$prefix]) && $ns[$prefix] === $uri)
-        {
+        if (isset($ns[$prefix]) && $ns[$prefix] === $uri) {
             $this->pass();
-        }
-        else
-        {
+        } else {
             $this->fail(sprintf($this->getLocale()->_($failMessage), $prefix, $uri));
         }
 
@@ -99,10 +95,10 @@ class node extends asserter
         $xml = $this->valueIsSet()->data->asXML();
         $impl = new \DOMImplementation;
         $dom = null;
-        if($dtd instanceof \DOMDocumentType) {
+        if ($dtd instanceof \DOMDocumentType) {
             $dom = $impl->createDocument(null, null, $dtd);
-        } elseif(false !== filter_var($dtd, FILTER_VALIDATE_URL) || is_file($dtd)) {
-            if(func_num_args() < 2) {
+        } elseif (false !== filter_var($dtd, FILTER_VALIDATE_URL) || is_file($dtd)) {
+            if (func_num_args() < 2) {
                 throw new exceptions\logic(
                     sprintf($this->getLocale()->_('You must give an URL + a root node name to valid with external DTD'))
                 );
@@ -116,13 +112,16 @@ class node extends asserter
             }
 
             $docType = $impl->createDocumentType($rootName, null, $dtd);
-            if(false === $docType) {
-                throw new exceptions\logic(
-                    sprintf($this->getLocale()->_('Can\'t build a DOMDocumentType using given data: %s:%s'), $rootName, $dtd)
-                );
+            if (false === $docType) {
+                throw new exceptions\logic(sprintf(
+                    $this->getLocale()->_('Can\'t build a DOMDocumentType using given data: %s:%s'),
+                    $rootName,
+                    $dtd
+                ));
             }
             $dom = $impl->createDocument(
-                null, null,
+                null,
+                null,
                 $impl->createDocumentType($rootName, null, $dtd)
             );
         }
@@ -138,14 +137,11 @@ class node extends asserter
         }
 
         $useError = libxml_use_internal_errors(true);
-        if(@$dom->validate())
-        {
+        if (@$dom->validate()) {
             $this->pass();
-        }
-        else
-        {
+        } else {
             $message = $this->getLocale()->_($failMessage);
-            foreach(libxml_get_errors() as $error) {
+            foreach (libxml_get_errors() as $error) {
                 $message .= PHP_EOL . sprintf('[%d] at line %s: %s', $error->level, $error->line, $error->message);
             }
 
@@ -162,21 +158,18 @@ class node extends asserter
         $dom = new \DOMDocument;
         $dom->loadXML($xml);
 
-        if(!is_file($schema)) {
+        if (!is_file($schema)) {
             throw new exceptions\logic(
                 sprintf($this->getLocale()->_('Given schema is not a valid file : %s'), $schema)
             );
         }
 
         $useError = libxml_use_internal_errors(true);
-        if(@$dom->schemaValidate($schema))
-        {
+        if (@$dom->schemaValidate($schema)) {
             $this->pass();
-        }
-        else
-        {
+        } else {
             $message = $this->getLocale()->_($failMessage);
-            foreach(libxml_get_errors() as $error) {
+            foreach (libxml_get_errors() as $error) {
                 $message .= PHP_EOL . sprintf('[%d] at line %s: %s', $error->level, $error->line, $error->message);
             }
 
@@ -189,8 +182,7 @@ class node extends asserter
 
     protected function valueIsSet($message = 'Xml is undefined')
     {
-        if ($this->data === null)
-        {
+        if ($this->data === null) {
             throw new exceptions\logic($message);
         }
 

@@ -2,9 +2,8 @@
 
 namespace mageekguy\atoum\xml\tests\units;
 
-use
-    mageekguy\atoum,
-    mageekguy\atoum\xml\extension as testedClass
+use mageekguy\atoum;
+use mageekguy\atoum\xml\extension as testedClass
 ;
 
 class extension extends atoum\test
