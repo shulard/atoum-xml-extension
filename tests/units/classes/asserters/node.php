@@ -76,7 +76,7 @@ XML;
                         ->item(0)
                             ->xpath('./dc:node')
                                 ->hasSize(1)
-                            ->parent()
+                            ->parent
                                 ->xpath('//atom:feed')
                                     ->hasSize(1)
                                     ->item(0)

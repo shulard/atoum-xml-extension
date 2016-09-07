@@ -48,6 +48,9 @@ class nodes extends asserter
             case 'size':
                 return $this->generator->__call('integer', array(count($this->valueIsSet()->data)));
 
+            case 'parent':
+                return $this->fromIsSet()->from;
+
             default:
                 throw new exceptions\logic(sprintf($this->getLocale()->_('Invalid asserter name %s'), $asserter));
         }
@@ -105,10 +108,5 @@ class nodes extends asserter
         }
 
         return $this;
-    }
-
-    public function parent()
-    {
-        return $this->fromIsSet()->from;
     }
 }
