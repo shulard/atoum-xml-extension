@@ -229,4 +229,28 @@ XML;
                 ->string['attr2']->isEqualTo('value 2')
         ;
     }
+
+    public function testNodeName()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<root>
+    <node>Node content</node>
+    <node>
+        <subnode />
+    </node>
+</root>
+XML;
+
+        $item = $this
+            ->xml($xml);
+
+        $item
+            ->xpath('//subnode')
+                ->item(0)
+                    ->nodeName
+                        ->isEqualTo('subnode')
+        ;
+    }
+
 }
