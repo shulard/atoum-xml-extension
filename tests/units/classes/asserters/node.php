@@ -253,4 +253,32 @@ XML;
         ;
     }
 
+    public function testDtdValidation()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<root>
+    <node/>
+    <node>
+        <subnode />
+    </node>
+</root>
+XML;
+
+        $this
+            ->given(
+                $path = realpath(__DIR__.'/../../../resources/node.dtd'),
+                $impl = new \DOMImplementation,
+                $docType = $impl->createDocumentType('root', '', $path)
+            )
+            ->then
+                ->xml($xml)
+                    ->validateWithDtd($docType)
+                ->xml($xml)
+                    ->validateWithDtd('file://'.$path, 'root')
+                ->xml($xml)
+                    ->validateWithDtd($path, 'root')
+        ;
+    }
+
 }
