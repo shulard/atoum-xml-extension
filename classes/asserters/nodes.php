@@ -96,7 +96,7 @@ class nodes extends asserter
         return $asserter->setWith($this->data[$position]);
     }
 
-    public function hasSize($size, $failMessage = null)
+    public function hasSize($size, $failMessage = '%s has size %d, expected size %d')
     {
         if (count($this->valueIsSet()->data) == $size)
         {
@@ -104,7 +104,7 @@ class nodes extends asserter
         }
         else
         {
-            $this->fail($failMessage ?: $this->_('%s has size %d, expected size %d', get_class($this), count($this->valueIsSet()->data), $size));
+            $this->fail($failMessage ?: $this->_($failMessage, get_class($this), count($this->valueIsSet()->data), $size));
         }
 
         return $this;
