@@ -39,6 +39,9 @@ class node extends asserter
             case 'nodevalue':
                 return $this->generator->__call('phpString', array((string)$this->valueIsSet()->data));
 
+            case 'nodename':
+                return $this->generator->__call('phpString', array((string)$this->valueIsSet()->data->getName()));
+
             case 'xml':
                 return $this->generator->__call('phpString', array($this->valueIsSet()->data->asXML()));
 
