@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--- Root element -->
+<!ELEMENT root (node+)>
+
+<!--- Node element -->
+<!ELEMENT node (subnode*)>
+
+<!ELEMENT subnode (#PCDATA)>
