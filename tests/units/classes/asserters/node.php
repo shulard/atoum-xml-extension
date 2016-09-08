@@ -298,4 +298,26 @@ XML;
                     ->validateWithSchema($path)
         ;
     }
+
+    public function testRelaxNGValidation()
+    {
+        $xml = <<<XML
+<?xml version="1.0"?>
+<root>
+    <node/>
+    <node>
+        <subnode />
+    </node>
+</root>
+XML;
+
+        $this
+            ->given(
+                $path = realpath(__DIR__.'/../../../resources/node.rng')
+            )
+            ->then
+                ->xml($xml)
+                    ->validateWithRelaxNG($path)
+        ;
+    }
 }
