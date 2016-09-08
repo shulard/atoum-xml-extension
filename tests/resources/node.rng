@@ -1,0 +1,17 @@
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" ns="" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <rng:start combine="choice">
+        <rng:ref name="root"/>
+    </rng:start>
+    <rng:define name="root">
+        <rng:element name="root">
+            <rng:element name="node">
+                <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="node">
+                <rng:element name="subnode">
+                    <rng:data type="string"/>
+                </rng:element>
+            </rng:element>
+        </rng:element>
+    </rng:define>
+</rng:grammar>
