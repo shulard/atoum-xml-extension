@@ -17,7 +17,6 @@ class extension implements atoum\extension
             };
             $parser
                 ->addHandler($handler, array('--test-ext'))
-                ->addHandler($handler, array('--test-it'))
             ;
         }
     }
