@@ -20,7 +20,7 @@ class schema extends asserter
     {
         parent::setWith($value);
         if (!is_string($value)) {
-            $this->fail(sprintf($this->getLocale()->_('%s is not a valid string'), $value));
+            $this->fail(sprintf($this->getLocale()->_('%s is not a valid string'), var_export($value, true)));
         }
 
         $this->data = new \DOMDocument;
@@ -82,13 +82,6 @@ class schema extends asserter
             }
 
             $docType = $impl->createDocumentType($rootName, null, $dtd);
-            if (false === $docType) {
-                throw new exceptions\logic(sprintf(
-                    $this->getLocale()->_('Can\'t build a DOMDocumentType using given data: %s:%s'),
-                    $rootName,
-                    $dtd
-                ));
-            }
             $dom = $impl->createDocument(
                 null,
                 null,
