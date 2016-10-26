@@ -40,6 +40,12 @@ class node extends asserter
             case 'xml':
                 return $this->generator->__call('phpString', array($this->valueIsSet()->data->asXML()));
 
+            case 'isvalidagainstschema':
+            case 'validate':
+                return $this->generator
+                    ->__call('mageekguy\atoum\xml\asserters\schema', array($this->valueIsSet()->data->asXML()))
+                    ->setFrom($this);
+
             default:
                 return $this->getNodesAsserter($this->valueIsSet()->data->children($asserter));
         }
