@@ -3,8 +3,7 @@
 namespace mageekguy\atoum\xml\asserters;
 
 use mageekguy\atoum\asserter;
-use mageekguy\atoum\exceptions
-;
+use mageekguy\atoum\exceptions;
 
 class nodes extends asserter
 {
@@ -15,31 +14,44 @@ class nodes extends asserter
     public function setFrom(node $node)
     {
         $this->from = $node;
+        return $this;
     }
 
     public function setWith($value)
     {
         parent::setWith($value);
-        if (is_array($value) === true || $value instanceof \SimpleXMLElement) {
-            $count = is_array($value) === true?count($value):$value->count();
-            $filtered = array();
-            foreach ($value as $node) {
-                if ($node instanceof \SimpleXMLElement) {
-                    $filtered[] = $node;
-                }
-            }
+        if($value instanceof \SimpleXMLElement) {
+            $count = $value->count();
+            $collection = $value->children();
+        } elseif (is_array($value) === true) {
+            $count = count($value);
+            $collection = $value;
+        } else {
+            $this->fail(sprintf(
+                $this->getLocale()->_('%s is not a valid array or SimpleXMLElement'),
+                var_export($value, true)
+            ));
+        }
 
-            if (count($filtered) === $count) {
-                $this->data = $value;
-                $this->isSet = true;
-                return $this;
+        if(isset($count))
+        $filtered = array();
+        foreach ($collection as $node) {
+            if ($node instanceof \SimpleXMLElement) {
+                $filtered[] = $node;
             }
         }
 
-        $this->fail(sprintf(
-            $this->getLocale()->_('%s is not a valid array of SimpleXMLElement'),
-            var_export($value, true)
-        ));
+        if (count($filtered) !== $count) {
+            $this->fail(sprintf(
+                $this->getLocale()->_('%s Collection does not only contains SimpleXMLElement'),
+                var_export($value, true)
+            ));
+        }
+
+        $this->data = $filtered;
+        $this->isSet = true;
+
+        return $this;
     }
 
     public function __get($asserter)
