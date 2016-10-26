@@ -25,7 +25,7 @@ class schema extends asserter
 
         $this->data = new \DOMDocument;
 
-        $this->failOnLibXmlErrors(function() use ($value) {
+        $this->failOnLibXmlErrors(function () use ($value) {
             return @$this->data->loadXML($value);
         }, 'Invalid XML string given');
 
@@ -95,7 +95,7 @@ class schema extends asserter
             $dom->appendChild($dom->importNode($this->valueIsSet()->data->documentElement, true));
         }
 
-        $this->failOnLibXmlErrors(function() use ($dom) {
+        $this->failOnLibXmlErrors(function () use ($dom) {
             return @$dom->validate();
         }, $failMessage);
 
@@ -110,7 +110,7 @@ class schema extends asserter
             );
         }
 
-        $this->failOnLibXmlErrors(function() use ($schema) {
+        $this->failOnLibXmlErrors(function () use ($schema) {
             return @$this->valueIsSet()->data->schemaValidate($schema);
         }, $failMessage);
 
@@ -125,7 +125,7 @@ class schema extends asserter
             );
         }
 
-        $this->failOnLibXmlErrors(function() use ($rng) {
+        $this->failOnLibXmlErrors(function () use ($rng) {
             return @$this->valueIsSet()->data->relaxNGValidate($rng);
         }, $failMessage);
 
@@ -136,7 +136,7 @@ class schema extends asserter
     {
         $useError = libxml_use_internal_errors(true);
 
-        if(true === call_user_func($callable)) {
+        if (true === call_user_func($callable)) {
             $this->pass();
         } else {
             $message = $this->getLocale()->_($failMessage);

@@ -45,7 +45,10 @@ class nodes extends atoum\test
                         $asserter->setWith([$value = $test->sample($string)]);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
-                    ->hasMessage(sprintf('%s Collection does not only contains SimpleXMLElement', var_export([$value], true)))
+                    ->hasMessage(sprintf(
+                        '%s Collection does not only contains SimpleXMLElement',
+                        var_export([$value], true)
+                    ))
         ;
     }
 

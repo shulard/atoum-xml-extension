@@ -20,7 +20,7 @@ class nodes extends asserter
     public function setWith($value)
     {
         parent::setWith($value);
-        if($value instanceof \SimpleXMLElement) {
+        if ($value instanceof \SimpleXMLElement) {
             $count = $value->count();
             $collection = $value->children();
         } elseif (is_array($value) === true) {
@@ -33,8 +33,9 @@ class nodes extends asserter
             ));
         }
 
-        if(isset($count))
-        $filtered = array();
+        if (isset($count)) {
+            $filtered = array();
+        }
         foreach ($collection as $node) {
             if ($node instanceof \SimpleXMLElement) {
                 $filtered[] = $node;
