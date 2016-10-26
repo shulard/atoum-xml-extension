@@ -3,12 +3,11 @@
 namespace mageekguy\atoum\xml\tests\units\asserters;
 
 use mageekguy\atoum;
-use mageekguy\atoum\xml\asserters\node as testedClass
-;
+use mageekguy\atoum\xml\asserters\node as SUT;
 
 class node extends atoum\test
 {
-    public function testClass()
+    public function test_class()
     {
         $this
             ->testedClass
@@ -16,14 +15,14 @@ class node extends atoum\test
         ;
     }
 
-    public function testSetWithInvalidXml()
+    public function test_set_with_invalid_xml()
     {
         $string = $this->realdom->regex('/[a-z]+/');
         $this
             ->given(
                 $test = $this
             )
-            ->if($asserter = new testedClass())
+            ->if($asserter = new SUT())
             ->then
                 ->exception(function () use ($asserter, & $value, $test, $string) {
                         $asserter->setWith($value = $test->sample($string));
@@ -33,7 +32,20 @@ class node extends atoum\test
         ;
     }
 
-    public function testHasNamespaceFail()
+    public function test_no_value_given()
+    {
+        $this
+            ->if($asserter = new SUT())
+            ->then
+                ->exception(function () use ($asserter) {
+                        $asserter->size;
+                })
+                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->hasMessage('Xml is undefined')
+        ;
+    }
+
+    public function test_has_namespace_fail()
     {
         $this
             ->given(
@@ -42,7 +54,7 @@ class node extends atoum\test
                 $prefix = 'm',
                 $uri = 'http://example.com'
             )
-            ->if($asserter = new testedClass())
+            ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
                 ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
@@ -53,7 +65,7 @@ class node extends atoum\test
         ;
     }
 
-    public function testNamespaces()
+    public function test_namespaces()
     {
         $xml = <<<XML
 <?xml version="1.0" ?>
@@ -76,12 +88,12 @@ XML;
                             ->parent
                                 ->xpath('//atom:feed')
                                     ->hasSize(1)
-                                    ->item(0)
+                                    ->first()
                                         ->nodeValue->isEqualTo("12")
         ;
     }
 
-    public function testHasDocNamespaceFail()
+    public function test_has_doc_namespace_fail()
     {
         $this
             ->given(
@@ -90,7 +102,7 @@ XML;
                 $prefix = 'm',
                 $uri = 'http://example.com'
             )
-            ->if($asserter = new testedClass())
+            ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
                 ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
@@ -101,14 +113,14 @@ XML;
         ;
     }
 
-    public function testSetWithSimpleXmlElement()
+    public function test_set_with_simplexmlelement()
     {
         $this
             ->given(
                 $test = $this,
                 $xml = new \SimpleXmlElement('<?xml version="1.0"?><root></root>')
             )
-            ->if($asserter = new testedClass())
+            ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
                 ->object($asserter->size)
@@ -116,7 +128,7 @@ XML;
         ;
     }
 
-    public function testChildrenProperty()
+    public function test_children_property()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -131,7 +143,7 @@ XML;
 XML;
 
         $this
-            ->if($asserter = new testedClass())
+            ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
                 ->object($children = $asserter->children)
@@ -143,7 +155,7 @@ XML;
                 ->isEqualTo(2);
     }
 
-    public function testXpath()
+    public function test_xpath()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -165,7 +177,7 @@ XML;
         ;
     }
 
-    public function testXpathWithNamespace()
+    public function test_xpathwith_namespace()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -196,7 +208,7 @@ XML;
         ;
     }
 
-    public function testAttributes()
+    public function test_attributes()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -226,7 +238,7 @@ XML;
         ;
     }
 
-    public function testNodeName()
+    public function test_node_name()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -249,75 +261,60 @@ XML;
         ;
     }
 
-    public function testDtdValidation()
+    public function test_schema_asserter_on_validate()
     {
-        $xml = <<<XML
-<?xml version="1.0"?>
-<root>
-    <node/>
-    <node>
-        <subnode />
-    </node>
-</root>
-XML;
+        $item = $this
+            ->xml('<?xml version="1.0" ?><root></root>')
+            ->validate;
 
         $this
-            ->given(
-                $path = realpath(__DIR__.'/../../../resources/node.dtd'),
-                $impl = new \DOMImplementation,
-                $docType = $impl->createDocumentType('root', '', $path)
-            )
             ->then
-                ->xml($xml)
-                    ->validateWithDtd($docType)
-                ->xml($xml)
-                    ->validateWithDtd('file://'.$path, 'root')
-                ->xml($xml)
-                    ->validateWithDtd($path, 'root')
+                ->object($item)
+                    ->isInstanceOf('mageekguy\atoum\xml\asserters\schema')
         ;
     }
 
-    public function testSchemaValidation()
+    public function test_schema_asserter_on_is_valid_against_schema()
     {
-        $xml = <<<XML
-<?xml version="1.0"?>
-<root>
-    <node/>
-    <node>
-        <subnode />
-    </node>
-</root>
-XML;
+        $item = $this
+            ->xml('<?xml version="1.0" ?><root></root>')
+            ->isValidAgainstSchema;
 
         $this
-            ->given(
-                $path = realpath(__DIR__.'/../../../resources/node.xsd')
-            )
             ->then
-                ->xml($xml)
-                    ->validateWithSchema($path)
+                ->object($item)
+                    ->isInstanceOf('mageekguy\atoum\xml\asserters\schema')
         ;
     }
 
-    public function testRelaxNGValidation()
+    public function test_string_asserter_on_xml()
     {
-        $xml = <<<XML
-<?xml version="1.0"?>
-<root>
-    <node/>
-    <node>
-        <subnode />
-    </node>
-</root>
-XML;
+        $item = $this
+            ->xml('<?xml version="1.0" ?><root></root>')
+            ->xml;
 
         $this
-            ->given(
-                $path = realpath(__DIR__.'/../../../resources/node.rng')
-            )
             ->then
-                ->xml($xml)
-                    ->validateWithRelaxNG($path)
+                ->object($item)
+                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+        ;
+    }
+
+    public function test_nodes_asserter_on_property_access()
+    {
+        $item = $this
+            ->xml('<?xml version="1.0" ?><root><node/></root>')
+            ->node;
+
+        $this
+            ->then
+                ->object($item)
+                    ->isInstanceOf('mageekguy\atoum\xml\asserters\nodes')
+        ;
+
+        $item
+            ->size
+                ->isEqualTo(1)
         ;
     }
 }
