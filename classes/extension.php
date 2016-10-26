@@ -37,7 +37,7 @@ class extension implements atoum\extension
                         $asserter = new atoum\xml\asserters\node($test->getAsserterGenerator());
                     }
                     if (null === $xml) {
-                        return $asserter;
+                        throw new atoum\exceptions\logic("Xml is undefined");
                     }
 
                     return $asserter
