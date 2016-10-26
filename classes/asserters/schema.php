@@ -61,7 +61,7 @@ class schema extends asserter
         return $this;
     }
 
-    public function dtd($dtd = null, $failMessage = "Can't validate document using the given DTD")
+    public function dtd($dtd, $failMessage = "Can't validate document using the given DTD")
     {
         $impl = new \DOMImplementation;
         $dom = null;
@@ -109,7 +109,7 @@ class schema extends asserter
         return $this;
     }
 
-    public function schema($schema = null, $failMessage = "Can't validate document using the given Schema")
+    public function schema($schema, $failMessage = "Can't validate document using the given Schema")
     {
         if (!is_file($schema)) {
             throw new exceptions\logic(
@@ -124,7 +124,7 @@ class schema extends asserter
         return $this;
     }
 
-    public function relaxNg($rng = null, $failMessage = "Can't validate document using the given Schema")
+    public function relaxNg($rng, $failMessage = "Can't validate document using the given Schema")
     {
         if (!is_file($rng)) {
             throw new exceptions\logic(
