@@ -3,8 +3,7 @@
 namespace mageekguy\atoum\xml\asserters;
 
 use mageekguy\atoum\asserter;
-use mageekguy\atoum\exceptions
-;
+use mageekguy\atoum\exceptions;
 
 class node extends asserter
 {
@@ -26,7 +25,7 @@ class node extends asserter
     {
         switch (strtolower($asserter)) {
             case 'children':
-                return $this->getNodesAsserter($this->valueIsSet()->data->children());
+                return $this->getNodesAsserter((array)$this->valueIsSet()->data->xpath('./*'));
 
             case 'size':
                 return $this->generator->__call('integer', array($this->valueIsSet()->data->count()));
@@ -47,7 +46,7 @@ class node extends asserter
                     ->setFrom($this);
 
             default:
-                return $this->getNodesAsserter($this->valueIsSet()->data->children($asserter));
+                return $this->getNodesAsserter($this->valueIsSet()->data->xpath('./'.$asserter));
         }
     }
 
