@@ -48,6 +48,7 @@ use atoum;
 
 class foo extends atoum\test
 {
+    //Test attribute on nodes
     public function testAttributes()
     {
         $xml = <<<XML
@@ -73,6 +74,7 @@ XML;
         ;
     }
 
+    //Test node content using phpString asserter
     public function testXpathAndNodeContent()
     {
         $xml = <<<XML
@@ -92,6 +94,7 @@ XML;
         ;
     }
 
+    //Validate namespace on nodes
     public function testNamespaces()
     {
         $xml = <<<XML
@@ -117,6 +120,30 @@ XML;
                                     ->hasSize(1)
                                     ->item(0)
                                         ->nodeValue->isEqualTo("12")
+        ;
+    }
+
+    //Validate document through schema (DTD, XSD, RNG)
+    public function testSchemaValidation()
+    {
+        $xml = <<<XML
+<?xml version="1.0" ?>
+<root>
+    <atom:feed>1<dc:node>namespaced content</dc:node>2</atom:feed>
+</root>
+XML;
+
+        $this
+            ->then
+                ->xml($xml)
+                    ->isValidAgainstSchema
+                        ->dtd('file://path/to.dtd', 'root')
+                ->node
+                    ->isValidAgainstSchema
+                        ->schema('/path/to/schema.xsd')
+                ->node
+                    ->isValidAgainstSchema
+                        ->relaxNg('/path/to/file.rng')
         ;
     }
 }
