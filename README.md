@@ -1,29 +1,18 @@
-# shulard/atoum-xml-extension [![Build Status](https://travis-ci.org/shulard/atoum-xml-extension.svg?branch=master)](https://travis-ci.org/shulard/atoum-xml-extension)
+# atoum/xml-extension [![Build Status](https://travis-ci.org/shulard/atoum-xml-extension.svg?branch=master)](https://travis-ci.org/shulard/atoum-xml-extension)
 
 ![atoum](http://atoum.org/images/logo/atoum.png)
-
-*This project is currently in development and shouldn't be used in production !*
 
 ## Install it
 
 Install extension using [composer](https://getcomposer.org):
 
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:shulard/atoum-xml-extension.git"
-        }
-    ],
-    "require-dev": {
-        "shulard/atoum-xml-extension": "^0.0"
-    },
-}
-
+```bash
+composer require --dev shulard/atoum-xml-extension
 ```
 
-Enable the extension using atoum configuration file:
+## Enable it
+
+You should add the following lines in your atoum configuration file:
 
 ```php
 <?php
@@ -40,7 +29,6 @@ $runner->addExtension(new xml\extension($script));
 ## Use it
 
 ```php
-
 <?php
 namespace shulard\example\xml;
 
@@ -147,5 +135,13 @@ XML;
         ;
     }
 }
-
 ```
+
+## Links
+
+* [atoum](http://atoum.org)
+* [atoum's documentation](http://docs.atoum.org)
+
+## Licence
+
+atoum-xml-extension is released under the Apache2 License. See the bundled LICENSE file for details.
