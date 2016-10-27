@@ -1,6 +1,16 @@
 {
-    "name": "shulard/atoum-xml-extension",
+    "name": "atoum/xml-extension",
+    "type": "library",
     "description": "The atoum xml extension allows you to make assertions on XML files",
+    "keywords": ["atoum", "test", "unit testing", "xml", "schema validation", "extension", "atoum-extension"],
+    "homepage": "http://www.atoum.org",
+    "license": "apache-2",
+    "authors": [
+        {
+            "name": "Stéphane HULARD",
+            "email": "s.hulard@chstudio.fr"
+        }
+    ],
     "require": {
         "atoum/atoum": "^2.8"
     },
@@ -8,13 +18,6 @@
         "atoum/praspel-extension": "~0.16",
         "squizlabs/php_codesniffer": "~2"
     },
-    "license": "apache2",
-    "authors": [
-        {
-            "name": "Stéphane HULARD",
-            "email": "s.hulard@chstudio.fr"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "mageekguy\\atoum\\xml\\": "classes"
