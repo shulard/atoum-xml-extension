@@ -1,4 +1,4 @@
-# atoum/xml-extension [![Build Status](https://travis-ci.org/shulard/atoum-xml-extension.svg?branch=master)](https://travis-ci.org/shulard/atoum-xml-extension)
+# shulard/atoum-xml-extension [![Build Status](https://travis-ci.org/shulard/atoum-xml-extension.svg?branch=master)](https://travis-ci.org/shulard/atoum-xml-extension) [![Latest Stable Version](https://img.shields.io/packagist/v/shulard/atoum-xml-extension.svg)](https://packagist.org/packages/shulard/atoum-xml-extension) [![Total Downloads](https://img.shields.io/packagist/dm/shulard/atoum-xml-extension.svg)](https://packagist.org/packages/shulard/atoum-xml-extension)
 
 ![atoum](http://atoum.org/images/logo/atoum.png)
 
