@@ -12,7 +12,7 @@ class node extends atoum\test
         $this
             ->testedClass
                 ->isSubClassOf('mageekguy\atoum\asserter')
-        ;
+            ;
     }
 
     public function test_set_with_invalid_xml()
@@ -29,7 +29,7 @@ class node extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid XML', $value))
-        ;
+            ;
     }
 
     public function test_no_value_given()
@@ -42,7 +42,7 @@ class node extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('Xml is undefined')
-        ;
+            ;
     }
 
     public function test_has_namespace_fail()
@@ -62,7 +62,7 @@ class node extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s namespace does not exists with URI: %s', $prefix, $uri))
-        ;
+            ;
     }
 
     public function test_namespaces()
@@ -110,7 +110,7 @@ XML;
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s document namespace does not exists with URI: %s', $prefix, $uri))
-        ;
+            ;
     }
 
     public function test_set_with_simplexmlelement()

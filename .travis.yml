@@ -22,5 +22,5 @@ matrix:
 
 script:
   - composer update $COMPOSER_PREFER
-  - vendor/bin/phpcs --standard=phpcs.xml
+  - vendor/bin/phpcs --standard=phpcs.xml classes tests
   - vendor/bin/atoum --test-ext

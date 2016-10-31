@@ -29,7 +29,7 @@ class nodes extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($value, true)))
-        ;
+            ;
     }
 
     public function test_set_with_array_mixed()
@@ -49,7 +49,7 @@ class nodes extends atoum\test
                         '%s Collection does not only contains SimpleXMLElement',
                         var_export([$value], true)
                     ))
-        ;
+            ;
     }
 
     public function test_set_with_array()
@@ -100,7 +100,7 @@ class nodes extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('Node collection is undefined')
-        ;
+            ;
     }
 
     public function test_invalid_assert()
@@ -113,7 +113,7 @@ class nodes extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('Invalid asserter name nope')
-        ;
+            ;
     }
 
     public function test_invalid_item_position()
@@ -130,7 +130,7 @@ class nodes extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('No item at position 2')
-        ;
+                ;
     }
 
     public function test_no_parent()
@@ -143,7 +143,7 @@ class nodes extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('Node source is undefined')
-        ;
+            ;
     }
 
     public function test_parent_asserter()

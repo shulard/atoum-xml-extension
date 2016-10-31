@@ -28,7 +28,7 @@ class schema extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid string', var_export($value, true)))
-        ;
+                ;
     }
 
     public function test_set_with_invalid_xml()
@@ -47,7 +47,7 @@ class schema extends atoum\test
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->message
                         ->contains('Invalid XML string given')
-        ;
+                ;
     }
 
     public function test_missing_value()
@@ -62,7 +62,7 @@ class schema extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('XML document is undefined')
-        ;
+                ;
     }
 
     public function test_dtd_validation_from_uri_without_rootname()
@@ -77,7 +77,7 @@ class schema extends atoum\test
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->hasMessage('You must give an URL + a root node name to valid with external DTD')
-        ;
+                ;
     }
 
     public function test_dtd_validation_from_invalid_dtd()
@@ -94,7 +94,7 @@ class schema extends atoum\test
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->message
                         ->contains('Can\'t validate document using the given DTD')
-        ;
+                ;
     }
 
     public function test_dtd_validation_from_path()
@@ -184,7 +184,7 @@ XML;
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
-        ;
+                ;
     }
 
     public function test_schema_validation_from_path()
@@ -226,7 +226,7 @@ XML;
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
-        ;
+                ;
     }
 
     public function test_relax_ng_validation_from_path()
