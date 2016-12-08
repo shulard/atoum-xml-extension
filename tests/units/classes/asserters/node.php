@@ -32,6 +32,18 @@ class node extends atoum\test
             ;
     }
 
+    public function test_set_with_only_xml_assert()
+    {
+        $this
+            ->if($asserter = new SUT())
+                ->and($asserter->setWithTest(new self))
+                ->and($asserter->setWith("<?xml version=\"1.0\"?><root></root>"))
+            ->then
+                ->integer($asserter->getTest()->getScore()->getAssertionNumber())
+                    ->isEqualTo(1)
+        ;
+    }
+
     public function test_no_value_given()
     {
         $this

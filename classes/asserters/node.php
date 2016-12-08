@@ -18,6 +18,8 @@ class node extends asserter
             $this->fail(sprintf($this->getLocale()->_('%s is not a valid XML'), $value));
         }
 
+        $this->pass();
+
         return $this;
     }
 
