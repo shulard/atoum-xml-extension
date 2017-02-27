@@ -53,7 +53,7 @@ class node extends atoum\test
                         $asserter->size;
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
-                    ->hasMessage('Xml is undefined')
+                    ->hasMessage('XML is undefined')
             ;
     }
 

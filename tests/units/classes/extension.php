@@ -76,7 +76,7 @@ class extension extends atoum\test
                     $this->then->xml();
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
-                    ->hasMessage('Xml is undefined')
+                    ->hasMessage('XML is undefined')
         ;
     }
 }
