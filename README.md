@@ -1,7 +1,7 @@
 # shulard/atoum-xml-extension [![Build Status](https://travis-ci.org/shulard/atoum-xml-extension.svg?branch=master)](https://travis-ci.org/shulard/atoum-xml-extension) [![Latest Stable Version](https://img.shields.io/packagist/v/shulard/atoum-xml-extension.svg)](https://packagist.org/packages/shulard/atoum-xml-extension)
 
 This atoum extension allows you to test XML document using [atoum](https://github.com/atoum/atoum). It's possible to execute
-xpath against the document or to validate it using DTD, XSD or RelaxNG schema.
+xpath against the document or to validate it using DTD, XSD or RelaxNG schema. You can use it to validate HTML documents too.
 
 ## Example
 
@@ -183,6 +183,25 @@ XML;
                 ->node
                     ->isValidAgainstSchema
                         ->relaxNg('/path/to/file.rng')
+        ;
+    }
+
+    /**
+     * You can also make tests on HTML Document
+     */
+    public function testOnHtmlDocument()
+    {
+        $this
+            ->then
+                ->html(file_get_contents('http://example.com'))
+                ->xpath('//title')
+                    ->item(0)
+                        ->nodevalue
+                            ->isEqualTo('My awesome title')
+                ->xpath('//body/script')
+                    ->last()
+                        ->nodevalue
+                            ->contains('GMTXXXXXX');
         ;
     }
 }
