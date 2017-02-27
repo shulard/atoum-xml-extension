@@ -12,10 +12,17 @@ class node extends asserter
     public function setWith($value)
     {
         parent::setWith($value);
-        if ($value instanceof \SimpleXMLElement) {
+
+
+        if ($value instanceof \DOMDocument) {
+            $this->data = simplexml_import_dom($value);
+        } elseif ($value instanceof \SimpleXMLElement) {
             $this->data = $value;
         } elseif (false === $this->data = @simplexml_load_string($value)) {
-            $this->fail(sprintf($this->getLocale()->_('%s is not a valid XML'), $value));
+            $this->fail(sprintf(
+                $this->getLocale()->_('%s is not a valid XML'),
+                $value
+            ));
         }
 
         $this->pass();
@@ -97,7 +104,7 @@ class node extends asserter
         return $this;
     }
 
-    protected function valueIsSet($message = 'Xml is undefined')
+    protected function valueIsSet($message = 'XML is undefined')
     {
         if ($this->data === null) {
             throw new exceptions\logic($message);
