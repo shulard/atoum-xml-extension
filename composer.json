@@ -12,7 +12,10 @@
         }
     ],
     "require": {
-        "atoum/atoum": "^2.8 || ^3.0"
+        "atoum/atoum": "^2.8 || ^3.0",
+        "ext-dom": "*",
+        "ext-simplexml": "*",
+        "ext-libxml": "*"
     },
     "require-dev": {
         "atoum/praspel-extension": "~0.16",
