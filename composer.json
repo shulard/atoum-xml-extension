@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "atoum/atoum": "^2.8"
+        "atoum/atoum": "^2.8 || ^3.0"
     },
     "require-dev": {
         "atoum/praspel-extension": "~0.16",
@@ -23,5 +23,10 @@
             "mageekguy\\atoum\\xml\\": "classes"
         },
         "files": ["autoloader.php"]
+    },
+    "scripts": {
+        "test": "atoum --test-ext",
+        "cbf": "phpcbf --standard=phpcs.xml .",
+        "cs": "phpcs --standard=phpcs.xml ."
     }
 }
