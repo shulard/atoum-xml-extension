@@ -79,4 +79,26 @@ class extension extends atoum\test
                     ->hasMessage('XML is undefined')
         ;
     }
+
+    public function test_html_asserter_with_value()
+    {
+        $asserter = $this->then->html('<html />');
+        $this
+            ->then
+                ->object($asserter)
+                    ->isInstanceOf('mageekguy\atoum\xml\asserters\node')
+        ;
+    }
+
+    public function test_html_asserter_without_value()
+    {
+        $this
+            ->then
+                ->exception(function () {
+                    $this->then->html();
+                })
+                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->hasMessage('HTML is undefined')
+        ;
+    }
 }

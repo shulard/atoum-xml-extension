@@ -189,7 +189,7 @@ XML;
         ;
     }
 
-    public function test_xpathwith_namespace()
+    public function test_xpath_with_namespace()
     {
         $xml = <<<XML
 <?xml version="1.0"?>
@@ -327,6 +327,54 @@ XML;
         $item
             ->size
                 ->isEqualTo(1)
+        ;
+    }
+
+    public function test_asserter_on_html_document()
+    {
+        $node = $this
+            ->html(file_get_contents(__DIR__.'/../../../resources/index.html'));
+
+        $node->nodename->isEqualTo('html');
+        $items = $node->body;
+
+        $this
+            ->then
+                ->object($items)
+                    ->isInstanceOf('mageekguy\atoum\xml\asserters\nodes')
+        ;
+        $items
+            ->size
+                ->isEqualTo(1)
+        ;
+    }
+
+    public function test_xpath_on_html()
+    {
+        $html = $this
+            ->html(file_get_contents(__DIR__.'/../../../resources/index.html'));
+
+        $html
+            ->xpath('//meta[@name="Robots"]')
+                ->hasSize(1)
+                ->item(0)
+                    ->attributes()
+                        ->string['content']
+                            ->isEqualTo('Index, Follow')
+        ;
+        $html
+            ->xpath('//meta[starts-with(@property, "og:")]')
+                ->hasSize(6)
+                ->item(5)
+                    ->attributes()
+                        ->string['content']
+                            ->isEqualTo('CH Studio');
+        ;
+        $html
+            ->xpath('//body/script')
+                ->last()
+                    ->nodevalue
+                        ->contains('gapi.plusone.go();');
         ;
     }
 }
