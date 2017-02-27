@@ -113,7 +113,7 @@ class nodes extends asserter
             $this->pass();
         } else {
             $this->fail(
-                $failMessage ?: $this->_($failMessage, get_class($this), count($this->valueIsSet()->data), $size)
+                $this->_($failMessage, get_class($this), count($this->valueIsSet()->data), $size)
             );
         }
 
