@@ -4,7 +4,7 @@
     "description": "The atoum xml extension allows you to make assertions on XML files",
     "keywords": ["atoum", "test", "unit testing", "xml", "schema validation", "extension", "atoum-extension"],
     "homepage": "http://www.atoum.org",
-    "license": "apache-2",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Stéphane HULARD",
