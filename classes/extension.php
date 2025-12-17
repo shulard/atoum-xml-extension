@@ -36,7 +36,7 @@ class extension implements atoum\extension
             'xml',
             function ($xml = null, $depth = null, $options = null) use ($test, & $asserter) {
                 if ($asserter === null) {
-                    $asserter = new atoum\xml\asserters\node($test->getAsserterGenerator());
+                    $asserter = new \mageekguy\atoum\xml\asserters\node($test->getAsserterGenerator());
                 }
                 if (null === $xml) {
                     throw new atoum\exceptions\logic("XML is undefined");
@@ -51,7 +51,7 @@ class extension implements atoum\extension
             'html',
             function ($html = null, $depth = null, $options = null) use ($test, & $asserter) {
                 if ($asserter === null) {
-                    $asserter = new atoum\xml\asserters\node($test->getAsserterGenerator());
+                    $asserter = new \mageekguy\atoum\xml\asserters\node($test->getAsserterGenerator());
                 }
                 if (null === $html) {
                     throw new atoum\exceptions\logic("HTML is undefined");
