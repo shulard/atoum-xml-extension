@@ -2,8 +2,8 @@
 
 namespace mageekguy\atoum\xml\asserters;
 
-use mageekguy\atoum\asserter;
-use mageekguy\atoum\exceptions;
+use atoum\atoum\asserter;
+use atoum\atoum\exceptions;
 
 class schema extends asserter
 {

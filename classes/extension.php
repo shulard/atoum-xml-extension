@@ -1,10 +1,10 @@
 <?php
 namespace mageekguy\atoum\xml;
 
-use mageekguy\atoum;
-use mageekguy\atoum\observable;
-use mageekguy\atoum\runner;
-use mageekguy\atoum\test;
+use atoum\atoum;
+use atoum\atoum\observable;
+use atoum\atoum\runner;
+use atoum\atoum\test;
 
 class extension implements atoum\extension
 {
