@@ -34,7 +34,7 @@ class extension implements atoum\extension
         $manager = $test->getAssertionManager();
         $manager->setHandler(
             'xml',
-            function ($xml = null, $depth = null, $options = null) use ($test, & $asserter) {
+            function ($xml = null, $depth = null, $options = null) use ($test, &$asserter) {
                 if ($asserter === null) {
                     $asserter = new \mageekguy\atoum\xml\asserters\node($test->getAsserterGenerator());
                 }
@@ -49,7 +49,7 @@ class extension implements atoum\extension
         );
         $manager->setHandler(
             'html',
-            function ($html = null, $depth = null, $options = null) use ($test, & $asserter) {
+            function ($html = null, $depth = null, $options = null) use ($test, &$asserter) {
                 if ($asserter === null) {
                     $asserter = new \mageekguy\atoum\xml\asserters\node($test->getAsserterGenerator());
                 }

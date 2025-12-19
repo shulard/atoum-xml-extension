@@ -24,7 +24,7 @@ class node extends atoum\test
             )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $string) {
+                ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
@@ -69,7 +69,7 @@ class node extends atoum\test
             ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
+                ->exception(function () use ($asserter, &$value, $test, $prefix, $uri) {
                         $asserter->isUsedNamespace($prefix, $uri);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
@@ -117,7 +117,7 @@ XML;
             ->if($asserter = new SUT())
             ->and($asserter->setWith($xml))
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $prefix, $uri) {
+                ->exception(function () use ($asserter, &$value, $test, $prefix, $uri) {
                         $asserter->hasNamespace($prefix, $uri);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')

@@ -21,7 +21,7 @@ class nodes extends atoum\test
         $this
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $string) {
+                ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
@@ -35,7 +35,7 @@ class nodes extends atoum\test
         $this
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $string) {
+                ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith([$string]);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
