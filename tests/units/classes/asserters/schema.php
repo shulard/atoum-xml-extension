@@ -5,7 +5,7 @@ namespace mageekguy\atoum\xml\tests\units\asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\asserters\schema as SUT;
 
-class schema extends atoum\test
+class schema extends \atoum\atoum\test
 {
     public function test_class()
     {

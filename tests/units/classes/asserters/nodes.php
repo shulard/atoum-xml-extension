@@ -5,13 +5,13 @@ namespace mageekguy\atoum\xml\tests\units\asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\asserters\nodes as SUT;
 
-class nodes extends atoum\test
+class nodes extends \atoum\atoum\test
 {
     public function test_class()
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserter')
+                ->isSubClassOf('atoum\atoum\asserter')
         ;
     }
 
@@ -24,7 +24,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($string, true)))
             ;
     }
@@ -38,7 +38,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith([$string]);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf(
                         '%s Collection does not only contains SimpleXMLElement',
                         var_export([$string], true)
@@ -57,11 +57,11 @@ class nodes extends atoum\test
             ->when($result = $asserter->first()->nodename->isEqualTo('root'))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+                    ->isInstanceOf('atoum\atoum\asserters\phpString')
             ->when($result = $asserter->size->isEqualTo(1))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
+                    ->isInstanceOf('atoum\atoum\asserters\integer')
         ;
     }
 
@@ -76,11 +76,11 @@ class nodes extends atoum\test
             ->when($result = $asserter->first()->nodename->isEqualTo('node'))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+                    ->isInstanceOf('atoum\atoum\asserters\phpString')
             ->when($result = $asserter->size->isEqualTo(1))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
+                    ->isInstanceOf('atoum\atoum\asserters\integer')
         ;
     }
 
@@ -92,7 +92,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->size;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Node collection is undefined')
             ;
     }
@@ -105,7 +105,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->nope;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Invalid asserter name nope')
             ;
     }
@@ -122,7 +122,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->item(2);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('No item at position 2')
                 ;
     }
@@ -135,7 +135,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->parent;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Node source is undefined')
             ;
     }

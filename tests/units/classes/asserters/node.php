@@ -5,13 +5,13 @@ namespace mageekguy\atoum\xml\tests\units\asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\asserters\node as SUT;
 
-class node extends atoum\test
+class node extends \atoum\atoum\test
 {
     public function test_class()
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserter')
+                ->isSubClassOf('atoum\atoum\asserter')
             ;
     }
 
@@ -27,7 +27,7 @@ class node extends atoum\test
                 ->exception(function () use ($asserter, &$value, $string) {
                         $asserter->setWith($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid XML', $string))
             ;
     }
@@ -52,7 +52,7 @@ class node extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->size;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('XML is undefined')
             ;
     }
@@ -72,7 +72,7 @@ class node extends atoum\test
                 ->exception(function () use ($asserter, &$value, $test, $prefix, $uri) {
                         $asserter->isUsedNamespace($prefix, $uri);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s namespace does not exists with URI: %s', $prefix, $uri))
             ;
     }
@@ -120,7 +120,7 @@ XML;
                 ->exception(function () use ($asserter, &$value, $test, $prefix, $uri) {
                         $asserter->hasNamespace($prefix, $uri);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s document namespace does not exists with URI: %s', $prefix, $uri))
             ;
     }
@@ -136,7 +136,7 @@ XML;
             ->and($asserter->setWith($xml))
             ->then
                 ->object($asserter->size)
-                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
+                    ->isInstanceOf('atoum\atoum\asserters\integer')
         ;
     }
 
@@ -308,7 +308,7 @@ XML;
         $this
             ->then
                 ->object($item)
-                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+                    ->isInstanceOf('atoum\atoum\asserters\phpString')
         ;
     }
 

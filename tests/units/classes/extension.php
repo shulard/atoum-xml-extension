@@ -5,7 +5,7 @@ namespace mageekguy\atoum\xml\tests\units;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\extension as SUT;
 
-class extension extends atoum\test
+class extension extends \atoum\atoum\test
 {
     public function test_class()
     {
