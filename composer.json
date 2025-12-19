@@ -18,7 +18,6 @@
         "ext-libxml": "*"
     },
     "require-dev": {
-        "atoum/praspel-extension": "~0.16",
         "squizlabs/php_codesniffer": "~2"
     },
     "autoload": {

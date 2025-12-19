@@ -17,18 +17,18 @@ class node extends atoum\test
 
     public function test_set_with_invalid_xml()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "invalidxml";
         $this
             ->given(
                 $test = $this
             )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $string) {
-                        $asserter->setWith($value = $test->sample($string));
+                ->exception(function () use ($asserter, & $value, $string) {
+                        $asserter->setWith($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
-                    ->hasMessage(sprintf('%s is not a valid XML', $value))
+                    ->hasMessage(sprintf('%s is not a valid XML', $string))
             ;
     }
 

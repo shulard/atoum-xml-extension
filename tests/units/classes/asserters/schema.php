@@ -33,7 +33,7 @@ class schema extends atoum\test
 
     public function test_set_with_invalid_xml()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "invalid_xml";
         $this
             ->given(
                 $test = $this,
@@ -42,7 +42,7 @@ class schema extends atoum\test
             )
             ->then
                 ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->setWith($test->sample($string));
+                    $asserter->setWith($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->message
@@ -170,16 +170,15 @@ XML;
 
     public function test_schema_validation_from_invalid_path()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "test_invalid_path";
         $this
             ->given(
-                $test = $this,
                 $asserter = new SUT(),
                 $asserter->setWith('<?xml version="1.0"?><root></root>')
             )
             ->then
-                ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->schema($test->sample($string));
+                ->exception(function () use ($asserter, &$value, $string) {
+                    $asserter->schema($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->message
@@ -212,7 +211,7 @@ XML;
 
     public function test_relax_ng_validation_from_invalid_path()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "invalid_path_test";
         $this
             ->given(
                 $test = $this,
@@ -221,7 +220,7 @@ XML;
             )
             ->then
                 ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->relaxNg($test->sample($string));
+                    $asserter->relaxNg($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\exceptions\logic')
                     ->message

@@ -17,37 +17,31 @@ class nodes extends atoum\test
 
     public function test_set_with_invalid()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "a_string_that_is_not_a_valid_xml";
         $this
-            ->given(
-                $test = $this
-            )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $string) {
-                        $asserter->setWith($value = $test->sample($string));
+                ->exception(function () use ($asserter, & $value, $string) {
+                        $asserter->setWith($string);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
-                    ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($value, true)))
+                    ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($string, true)))
             ;
     }
 
     public function test_set_with_array_mixed()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "an_invalid_string";
         $this
-            ->given(
-                $test = $this
-            )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $string) {
-                        $asserter->setWith([$value = $test->sample($string)]);
+                ->exception(function () use ($asserter, & $value, $string) {
+                        $asserter->setWith([$string]);
                 })
                     ->isInstanceOf('mageekguy\atoum\asserter\exception')
                     ->hasMessage(sprintf(
                         '%s Collection does not only contains SimpleXMLElement',
-                        var_export([$value], true)
+                        var_export([$string], true)
                     ))
             ;
     }
