@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['5.5', '5.6', '7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
         atoum-versions: ['2.*', '3.*', '4.*']
         exclude:
           - php-versions: '5.5'
@@ -42,6 +42,22 @@ jobs:
           - php-versions: '8.1'
             atoum-versions: '2.*'
           - php-versions: '8.1'
+            atoum-versions: '3.*'
+          - php-versions: '8.2'
+            atoum-versions: '2.*'
+          - php-versions: '8.2'
+            atoum-versions: '3.*'
+          - php-versions: '8.3'
+            atoum-versions: '2.*'
+          - php-versions: '8.3'
+            atoum-versions: '3.*'
+          - php-versions: '8.4'
+            atoum-versions: '2.*'
+          - php-versions: '8.4'
+            atoum-versions: '3.*'
+          - php-versions: '8.5'
+            atoum-versions: '2.*'
+          - php-versions: '8.5'
             atoum-versions: '3.*'
       fail-fast: false
 

@@ -3,7 +3,7 @@
 ## TBR
 
 * Support of atoum 4.x
-* Enable support of PHP 8.0 and 8.1
+* Enable support of PHP 8.0 up to PHP 8.5
 
 ## 0.3.0 (2025-02-27)
 
