@@ -13,16 +13,39 @@ jobs:
     strategy:
       matrix:
         php-versions: ['5.5', '5.6', '7.0', '7.1', '7.2', '8.0', '8.1']
+        atoum-versions: ['2.*', '3.*', '4.*']
+        exclude:
+          - php-versions: '5.5'
+            atoum-versions: '4.*'
+          - php-versions: '5.6'
+            atoum-versions: '4.*'
+          - php-versions: '7.0'
+            atoum-versions: '2.*'
+          - php-versions: '7.0'
+            atoum-versions: '4.*'
+          - php-versions: '7.1'
+            atoum-versions: '2.*'
+          - php-versions: '7.1'
+            atoum-versions: '4.*'
+          - php-versions: '7.2'
+            atoum-versions: '2.*'
+          - php-versions: '8.0'
+            atoum-versions: '2.*'
+          - php-versions: '8.0'
+            atoum-versions: '3.*'
+          - php-versions: '8.1'
+            atoum-versions: '2.*'
+          - php-versions: '8.1'
+            atoum-versions: '3.*'
       fail-fast: false
 
-    name: PHP ${{ matrix.php-versions }} on ubuntu-latest
+    name: PHP ${{ matrix.php-versions }} on ubuntu-latest with atoum ${{ matrix.atoum-versions }}
 
     steps:
       - name: PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          coverage: ${{ matrix.coverage }}
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -40,6 +63,9 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist
+
+      - name: Update atoum to the specified version
+        run: composer update atoum/atoum:${{ matrix.atoum-versions }}
 
       - name: Run phpcs
         run: vendor/bin/phpcs --standard=phpcs.xml classes tests
