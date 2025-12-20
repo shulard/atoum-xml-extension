@@ -11,18 +11,18 @@ class extension extends \atoum\atoum\test
     {
         $this
             ->testedClass
-                ->hasInterface('mageekguy\atoum\extension')
+                ->hasInterface('atoum\atoum\extension')
         ;
     }
 
     public function test__construct()
     {
         $this
-            ->if($script = new atoum\scripts\runner(uniqid()))
-            ->and($script->setArgumentsParser($parser = new \mock\mageekguy\atoum\script\arguments\parser()))
+            ->if($script = new \atoum\atoum\scripts\runner(uniqid()))
+            ->and($script->setArgumentsParser($parser = new \mock\atoum\atoum\script\arguments\parser()))
         ;
 
-        $configurator = new \mock\mageekguy\atoum\configurator($script);
+        $configurator = new \mock\atoum\atoum\configurator($script);
         $this
             ->then
                 ->object($extension = new SUT())
@@ -38,7 +38,7 @@ class extension extends \atoum\atoum\test
     {
         $this
             ->if($extension = new SUT())
-            ->and($runner = new atoum\runner())
+            ->and($runner = new \atoum\atoum\runner())
             ->then
                 ->object($extension->setRunner($runner))->isIdenticalTo($extension)
         ;
@@ -48,8 +48,8 @@ class extension extends \atoum\atoum\test
     {
         $this
             ->if($extension = new SUT())
-            ->and($test = new \mock\mageekguy\atoum\test())
-            ->and($manager = new \mock\mageekguy\atoum\test\assertion\manager())
+            ->and($test = new \mock\atoum\atoum\test())
+            ->and($manager = new \mock\atoum\atoum\test\assertion\manager())
             ->and($test->setAssertionManager($manager))
             ->then
                 ->object($extension->setTest($test))->isIdenticalTo($extension)
@@ -75,7 +75,7 @@ class extension extends \atoum\atoum\test
                 ->exception(function () {
                     $this->then->xml();
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('XML is undefined')
         ;
     }
@@ -97,7 +97,7 @@ class extension extends \atoum\atoum\test
                 ->exception(function () {
                     $this->then->html();
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('HTML is undefined')
         ;
     }

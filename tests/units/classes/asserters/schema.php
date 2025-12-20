@@ -11,7 +11,7 @@ class schema extends \atoum\atoum\test
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserter')
+                ->isSubClassOf('atoum\atoum\asserter')
         ;
     }
 
@@ -26,7 +26,7 @@ class schema extends \atoum\atoum\test
                 ->exception(function () use ($asserter, $value) {
                     $asserter->setWith($value);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid string', var_export($value, true)))
                 ;
     }
@@ -44,7 +44,7 @@ class schema extends \atoum\atoum\test
                 ->exception(function () use ($asserter, &$value, $string, $test) {
                     $asserter->setWith($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->message
                         ->contains('Invalid XML string given')
                 ;
@@ -60,7 +60,7 @@ class schema extends \atoum\atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('');
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('XML document is undefined')
                 ;
     }
@@ -75,7 +75,7 @@ class schema extends \atoum\atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('file://mypath/to.dtd');
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('You must give an URL + a root node name to valid with external DTD')
                 ;
     }
@@ -91,7 +91,7 @@ class schema extends \atoum\atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('file://mypath/to.dtd', 'root');
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->message
                         ->contains('Can\'t validate document using the given DTD')
                 ;
@@ -180,7 +180,7 @@ XML;
                 ->exception(function () use ($asserter, &$value, $string) {
                     $asserter->schema($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
                 ;
@@ -222,7 +222,7 @@ XML;
                 ->exception(function () use ($asserter, &$value, $string, $test) {
                     $asserter->relaxNg($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
                 ;
