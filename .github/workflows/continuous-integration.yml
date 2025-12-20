@@ -45,7 +45,7 @@ jobs:
             atoum-versions: '3.*'
       fail-fast: false
 
-    name: PHP ${{ matrix.php-versions }} on ubuntu-latest with atoum ${{ matrix.atoum-versions }}
+    name: PHP ${{ matrix.php-versions }} / atoum ${{ matrix.atoum-versions }} on ubuntu-latest
 
     steps:
       - name: PHP
