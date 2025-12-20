@@ -5,49 +5,43 @@ namespace mageekguy\atoum\xml\tests\units\asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\asserters\nodes as SUT;
 
-class nodes extends atoum\test
+class nodes extends \atoum\atoum\test
 {
     public function test_class()
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserter')
+                ->isSubClassOf('atoum\atoum\asserter')
         ;
     }
 
     public function test_set_with_invalid()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "a_string_that_is_not_a_valid_xml";
         $this
-            ->given(
-                $test = $this
-            )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $string) {
-                        $asserter->setWith($value = $test->sample($string));
+                ->exception(function () use ($asserter, &$value, $string) {
+                        $asserter->setWith($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
-                    ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($value, true)))
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
+                    ->hasMessage(sprintf('%s is not a valid array or SimpleXMLElement', var_export($string, true)))
             ;
     }
 
     public function test_set_with_array_mixed()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "an_invalid_string";
         $this
-            ->given(
-                $test = $this
-            )
             ->if($asserter = new SUT())
             ->then
-                ->exception(function () use ($asserter, & $value, $test, $string) {
-                        $asserter->setWith([$value = $test->sample($string)]);
+                ->exception(function () use ($asserter, &$value, $string) {
+                        $asserter->setWith([$string]);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf(
                         '%s Collection does not only contains SimpleXMLElement',
-                        var_export([$value], true)
+                        var_export([$string], true)
                     ))
             ;
     }
@@ -63,11 +57,11 @@ class nodes extends atoum\test
             ->when($result = $asserter->first()->nodename->isEqualTo('root'))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+                    ->isInstanceOf('atoum\atoum\asserters\phpString')
             ->when($result = $asserter->size->isEqualTo(1))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
+                    ->isInstanceOf('atoum\atoum\asserters\integer')
         ;
     }
 
@@ -82,11 +76,11 @@ class nodes extends atoum\test
             ->when($result = $asserter->first()->nodename->isEqualTo('node'))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\phpString')
+                    ->isInstanceOf('atoum\atoum\asserters\phpString')
             ->when($result = $asserter->size->isEqualTo(1))
             ->then
                 ->object($result)
-                    ->isInstanceOf('mageekguy\atoum\asserters\integer')
+                    ->isInstanceOf('atoum\atoum\asserters\integer')
         ;
     }
 
@@ -98,7 +92,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->size;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Node collection is undefined')
             ;
     }
@@ -111,7 +105,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->nope;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Invalid asserter name nope')
             ;
     }
@@ -128,7 +122,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->item(2);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('No item at position 2')
                 ;
     }
@@ -141,7 +135,7 @@ class nodes extends atoum\test
                 ->exception(function () use ($asserter) {
                         $asserter->parent;
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('Node source is undefined')
             ;
     }

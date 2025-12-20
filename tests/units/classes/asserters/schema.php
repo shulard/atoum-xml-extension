@@ -5,13 +5,13 @@ namespace mageekguy\atoum\xml\tests\units\asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\xml\asserters\schema as SUT;
 
-class schema extends atoum\test
+class schema extends \atoum\atoum\test
 {
     public function test_class()
     {
         $this
             ->testedClass
-                ->isSubClassOf('mageekguy\atoum\asserter')
+                ->isSubClassOf('atoum\atoum\asserter')
         ;
     }
 
@@ -26,14 +26,14 @@ class schema extends atoum\test
                 ->exception(function () use ($asserter, $value) {
                     $asserter->setWith($value);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->hasMessage(sprintf('%s is not a valid string', var_export($value, true)))
                 ;
     }
 
     public function test_set_with_invalid_xml()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "invalid_xml";
         $this
             ->given(
                 $test = $this,
@@ -42,9 +42,9 @@ class schema extends atoum\test
             )
             ->then
                 ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->setWith($test->sample($string));
+                    $asserter->setWith($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->message
                         ->contains('Invalid XML string given')
                 ;
@@ -60,7 +60,7 @@ class schema extends atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('');
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('XML document is undefined')
                 ;
     }
@@ -75,7 +75,7 @@ class schema extends atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('file://mypath/to.dtd');
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->hasMessage('You must give an URL + a root node name to valid with external DTD')
                 ;
     }
@@ -91,7 +91,7 @@ class schema extends atoum\test
                 ->exception(function () use ($asserter) {
                     $asserter->dtd('file://mypath/to.dtd', 'root');
                 })
-                    ->isInstanceOf('mageekguy\atoum\asserter\exception')
+                    ->isInstanceOf('atoum\atoum\asserter\exception')
                     ->message
                         ->contains('Can\'t validate document using the given DTD')
                 ;
@@ -170,18 +170,17 @@ XML;
 
     public function test_schema_validation_from_invalid_path()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "test_invalid_path";
         $this
             ->given(
-                $test = $this,
                 $asserter = new SUT(),
                 $asserter->setWith('<?xml version="1.0"?><root></root>')
             )
             ->then
-                ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->schema($test->sample($string));
+                ->exception(function () use ($asserter, &$value, $string) {
+                    $asserter->schema($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
                 ;
@@ -212,7 +211,7 @@ XML;
 
     public function test_relax_ng_validation_from_invalid_path()
     {
-        $string = $this->realdom->regex('/[a-z]+/');
+        $string = "invalid_path_test";
         $this
             ->given(
                 $test = $this,
@@ -221,9 +220,9 @@ XML;
             )
             ->then
                 ->exception(function () use ($asserter, &$value, $string, $test) {
-                    $asserter->relaxNg($test->sample($string));
+                    $asserter->relaxNg($string);
                 })
-                    ->isInstanceOf('mageekguy\atoum\exceptions\logic')
+                    ->isInstanceOf('atoum\atoum\exceptions\logic')
                     ->message
                         ->contains('Given schema is not a valid file')
                 ;
